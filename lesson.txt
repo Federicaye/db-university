@@ -1,0 +1,59 @@
+1. Selezionare tutti i corsi del Corso di Laurea in Informatica (22)
+
+SELECT `courses`.`name`  FROM `degrees`
+JOIN `courses` 
+ON `degrees`.`id` = `courses`.`degree_id`
+WHERE `degrees`.`name` = `Corso di Laurea in Informatica`
+
+2. Selezionare le informazioni sul corso con id = 144, con tutti i relativi appelli d’esame
+
+SELECT * FROM `courses` 
+JOIN `exams`
+ON `exams`.`course_id` = `courses`.`id`
+WHERE `courses`.`id` = 144;
+
+3. Selezionare a quale dipartimento appartiene il Corso di Laurea in Diritto
+dell'Economia (Dipartimento di Scienze politiche, giuridiche e studi internazionali)
+SELECT `departments`.`name`, `degrees`.`name` 
+FROM `departments` 
+JOIN `degrees`
+ON `departments`.`id` = `degrees`.`department_id`
+WHERE `degrees`.`name`= ` Corso di Laurea in Diritto
+dell'Economia`
+
+SELECT * FROM `
+4. Selezionare tutti gli appelli d'esame del Corso di Laurea Magistrale in Fisica del
+primo anno
+SELECT * FROM `degrees`
+JOIN `courses`
+ON `degrees`.`id` = `courses`.`degree_id`
+JOIN `exams`
+ON `exam`.`course_id` = `courses`.`id`
+WHERE `degree`.`name` = `Corso di Laurea Magistrale in Fisica`AND `course`.`year` = 1;
+
+5. Selezionare tutti i docenti che insegnano nel Corso di Laurea in Lettere (21)
+
+SELECT * FROM `degree`
+JOIN `course`
+ON `degree`.`id` = `course`.`degree_id`
+JOIN `course_teachers`
+ON `course_teachers`.`course_id` = `course`.`course_id`
+WHERE `degrees`.`name` = `Corso di Laurea in Lettere`
+
+
+6. Selezionare il libretto universitario di Mirco Messina (matricola n. 620320)
+SELECT * FROM `exam_students`
+JOIN `exams`
+ON `exam_students`.`exam_id` = `exams`.`id`
+JOIN `student`
+ON `exam_students`.`student_id` = `student`.`id`
+WHERE `students`.name = 'Mirco Messina'
+
+
+7. Selezionare il voto medio di superamento d'esame per ogni corso, con anche i dati
+del corso di laurea associato, ordinati per media voto decrescente
+
+SELECT AVG(`exams_students`.`vote`) AS `media` GROUP BY `course`.`id`
+FROM `exams_students`
+JOIN `exam`
+ON `exam`.`id` = `exams_students`.`exam_id`
